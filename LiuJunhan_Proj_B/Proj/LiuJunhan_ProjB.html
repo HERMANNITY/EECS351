@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Shapes</title>
+  </head>
+	<!--	Create the HTML5 'canvas' element in which we will run WebGL
+	-->
+  <body onload="main()">
+    <canvas id="webgl" width="600" height="600">
+    Please use a browser that supports "canvas"
+    </canvas>
+	<p>
+	<!-- Make a 'div' element to hold changeable HTML made in our JavaScript file;
+		 (where? look inside main(), inside its 'tick()' function, where we
+		 display the 'current angle' value.
+	-->
+	<div id= ShapeName></div> 
+
+    
+    <button type="button" onclick="leftYaw()">Yaw left </button>
+
+    <button type="button" onclick="rightYaw()">Yaw right </button>
+
+    <button type="button" onclick="upPitch()">Pitch up </button>
+
+    <button type="button" onclick="downPitch()">Pitch down </button>
+
+    
+    </p>
+    <p>
+    	<button type="button" onclick="followw()">follow </button>
+    	<button type="button" onclick="fly_flg()">fly </button>
+    </p>
+  <p>Instruction:
+  </p>
+	<p>
+		Mouse Interaction:
+		1)Double click on the canvas to adjust the view.
+
+		2)Drag on the screen to rotate the Tetrahedron.
+	</p>
+	<p>
+		Keyboard Interaction:
+		Press "r" to return the original status. Press "b" and "l" to adjust the size of the rabbits head.
+	</p>
+	
+	<p>	Press "w" "a" "s" "d" "," "."  to adjust the position of your eyes step by step. "shift" and "control" to adjust the speed of your movement.
+	</p>
+	<p>
+		In the flying mode, Press "u" and "j" to pitch up and down, press "h" and "k" to turn left and right.
+	</p>
+	<p>	Press "1" "2" "3" "4" "5" "6" "7" "8"  to adjust the 6 frustrum.
+	</p>
+	<p>	Button Interaction:
+		Press Yaw left and right, Pitch up and down to yaw up and down and pitch up and down
+	</p>
+	<p>
+		Press follow to see the world with the end of the wierd joints.
+	</p>
+	<p>
+		Press fly to start and stop the flying mode. 
+	</p>
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-mod.js"></script>
+    <script src="../lib/cuon-matrix-quat.js"></script>
+	
+    <script src="LiuJunhan_ProjB.js"></script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body id="mainBody">
+
+    <table id = "mainTable">
+      <tr>
+        <td align="right">
+          <div id="canvas">
+            <body onload="main()" onresize="winResize()">
+
+              <canvas id="webgl" width="400" height="400">
+                Please use a browser that supports "canvas"
+              </canvas>
+              <script src="lib/webgl-utils.js"></script>
+              <script src="lib/webgl-debug.js"></script>
+              <script src="lib/cuon-utils.js"></script>
+              <script src="lib/cuon-matrix-quat.js"></script>
+              <script src="lib/Lamp.js"></script>
+              <script src="lib/Material.js"></script>
+              <script src="LiuJunhan_ProjC.js"></script>
+            </body>
+          </div>
+        </td>
+        
+        <p>
+          <div id="instruction">
+            <table border="0">
+              <tr>
+                <td><h1>Instruction</h1></td>
+              </tr>
+
+              <tr>
+               <td>
+                <table>
+                    <tr>
+                      <td>Drag Mouse To Rotate Camera</td>
+                    </tr>
+                    <tr>
+                      <td>Move Camera:: W:forward  S:backward A:left D:right Q:Up E:Down</td>
+                    </tr>
+                    <tr>
+                      <td>Move Lamp:: I:foward K:backward J:left L:right U:Up O:Down</td>
+                    </tr>
+                  </table>
+               </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        <table>
+                          <tr>
+                            <td><h2>Moving Lamp</h2></td>
+                          </tr>
+                          <tr>
+                            <td>Turn <button type="button" onclick="moveLampSwitch()" id="moveLampSwitch">Off</button> Move Lamp</td>
+                          </tr>
+                          <tr>
+                            <td>Choose Shading/Lighting Mode: </td>
+                            <td>
+                              <select id ="SLmode">
+                                <option value = "1">Gouraud Shading</option>
+                                <option value = "2">Blinn-Phong Lighting</option>
+                                <option value = "3">Cook-Torrance Shading</option>
+                                <option value = "4">Phong Lighting</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table>
+                          <tr>
+                            <td><label id='moveLamp_Ambi_R_text'></label></td>
+                            <td><label id='moveLamp_Ambi_G_text'></label></td>
+                            <td><label id='moveLamp_Ambi_B_text'></label></td>
+                          </tr>
+                          <tr>
+                            <td><input type="range" id="moveLamp_Ambi_R" min="0" max="1" value="0.5" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Ambi_G" min="0" max="1" value="0.5" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Ambi_B" min="0" max="1" value="0.5" step="0.1"></input></td>
+                          </tr>
+                          <tr>
+                            <td><label id='moveLamp_Diff_R_text'></label></td>
+                            <td><label id='moveLamp_Diff_G_text'></label></td>
+                            <td><label id='moveLamp_Diff_B_text'></label></td>
+                          </tr>
+                          <tr>
+                            <td><input type="range" id="moveLamp_Diff_R" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Diff_G" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Diff_B" min="0" max="1" value="1.0" step="0.1"></input></td>
+                          </tr>
+                          <tr>
+                            <td><label id='moveLamp_Spec_R_text'></label></td>
+                            <td><label id='moveLamp_Spec_G_text'></label></td>
+                            <td><label id='moveLamp_Spec_B_text'></label></td>
+                          </tr>
+                          <tr>
+                            <td><input type="range" id="moveLamp_Spec_R" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Spec_G" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            <td><input type="range" id="moveLamp_Spec_B" min="0" max="1" value="1.0" step="0.1"></input></td>
+                          </tr>
+
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        <table>
+                          <tr>
+                            <td><h2>Head Lamp</h2></td>
+                          </tr>
+                          <tr>
+                            <td>Turn <button type="button" onclick="headLampSwitch()" id="headLampSwitch">On</button> Head Lamp</td>
+                          </tr>
+                          <tr>
+                            <td>Choose Attenuation Mode: </td>
+                            <td>
+                              <select id ="ATTmode">
+                                <option value = "1">NONE</option>
+                                <option value = "2">1/dist</option>
+                                <option value = "3">1/square(dist)</option>
+                                <option value = "4">Blinn Attenuation</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                          <table>
+                            <tr>
+                              <td><label id='headLamp_Ambi_R_text'></label></td>
+                              <td><label id='headLamp_Ambi_G_text'></label></td>
+                              <td><label id='headLamp_Ambi_B_text'></label></td>
+                            </tr>
+                            <tr>
+                              <td><input type="range" id="headLamp_Ambi_R" min="0" max="1" value="0.5" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Ambi_G" min="0" max="1" value="0.5" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Ambi_B" min="0" max="1" value="0.5" step="0.1"></input></td>
+                            </tr>
+                            <tr>
+                              <td><label id='headLamp_Diff_R_text'></label></td>
+                              <td><label id='headLamp_Diff_G_text'></label></td>
+                              <td><label id='headLamp_Diff_B_text'></label></td>
+                            </tr>
+                            <tr>
+                              <td><input type="range" id="headLamp_Diff_R" min="0" max="1" value="1.0" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Diff_G" min="0" max="1" value="1.0" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Diff_B" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            </tr>
+                            <tr>
+                              <td><label id='headLamp_Spec_R_text'></label></td>
+                              <td><label id='headLamp_Spec_G_text'></label></td>
+                              <td><label id='headLamp_Spec_B_text'></label></td>
+                            </tr>
+                            <tr>
+                              <td><input type="range" id="headLamp_Spec_R" min="0" max="1" value="1.0" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Spec_G" min="0" max="1" value="1.0" step="0.1"></input></td>
+                              <td><input type="range" id="headLamp_Spec_B" min="0" max="1" value="1.0" step="0.1"></input></td>
+                            </tr>
+                          </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>  
+            </table>
+        </div>
+
+        </p>
+      </tr>
+    </table>
+  </body>
+</html>

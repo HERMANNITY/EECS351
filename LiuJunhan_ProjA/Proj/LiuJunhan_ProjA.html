@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Shapes</title>
+  </head>
+	<!--	Create the HTML5 'canvas' element in which we will run WebGL
+	-->
+  <body onload="main()">
+    <canvas id="webgl" width="600" height="600">
+    Please use a browser that supports "canvas"
+    </canvas>
+	<p>
+	<!-- Make a 'div' element to hold changeable HTML made in our JavaScript file;
+		 (where? look inside main(), inside its 'tick()' function, where we
+		 display the 'current angle' value.
+	-->
+	<div id= ShapeName></div> 
+
+    <button type="button" onclick="spinDown()">Spin -- </button>
+
+    <button type="button" onclick="spinUp()">Spin ++ </button>
+
+    <button type="button" onclick="spinupupup()">Spinupupup >> </button>
+    </p>
+  <p>Instruction:
+  </p>
+	<p>
+		Mouse Interaction:
+		1)Double click on the canvas to draw new balls.
+
+		2)Drag on the screen to move the left shape.
+	</p>
+	<p>
+		Keyboard Interaction:
+		Press "s" to stop animation. Press "r" to return the original status. Press "b" and "l" to adjust the size of the rabbits head. 
+		Press arrows to adjust the position of the rabbits head.
+	</p>
+	<p>
+		Press the buttons under the canvas to adjust the speed.
+	</p>
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-mod.js"></script>
+	
+    <script src="LiuJunhan_ProjA.js"></script>
+  </body>
+</html>
